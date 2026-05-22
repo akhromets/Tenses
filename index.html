@@ -1,0 +1,1553 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>English Tenses for Engineers</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070b12;
+      --bg-soft: #0b111c;
+      --panel: #0f1724;
+      --panel-strong: #121c2b;
+      --text: #eef5ff;
+      --muted: #93a4bb;
+      --faint: #607087;
+      --border: rgba(148, 163, 184, 0.18);
+      --border-strong: rgba(147, 197, 253, 0.32);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.13);
+      --accent-border: rgba(249, 115, 22, 0.45);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(59, 130, 246, 0.14), transparent 26rem),
+        radial-gradient(circle at 78% 8%, rgba(34, 197, 94, 0.09), transparent 24rem),
+        linear-gradient(180deg, #08111d 0%, var(--bg) 38%, #060a10 100%);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+
+    .app-shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 64px;
+    }
+
+    .hero {
+      min-height: min(620px, 78vh);
+      display: grid;
+      align-content: center;
+      padding: 48px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      gap: 8px;
+      margin: 0 0 22px;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: #b9c8dc;
+      background: rgba(15, 23, 36, 0.68);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 18px rgba(34, 197, 94, 0.65);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin-bottom: 18px;
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+    }
+
+    .hero-lede {
+      max-width: 620px;
+      margin-bottom: 22px;
+      color: #cbd8e9;
+      font-size: clamp(1.2rem, 2.3vw, 1.75rem);
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    .hero-subtitle {
+      max-width: 650px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(18, 28, 43, 0.96), rgba(10, 16, 27, 0.96));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.09);
+      pointer-events: none;
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 16px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #64748b;
+    }
+
+    .dot:nth-child(1) { background: #fb7185; }
+    .dot:nth-child(2) { background: #fbbf24; }
+    .dot:nth-child(3) { background: #34d399; }
+
+    .hero-panel code {
+      display: block;
+      min-height: 252px;
+      padding: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: 6px;
+      background: #090e17;
+      color: #d9e7ff;
+      font-family: var(--mono);
+      font-size: clamp(0.78rem, 1.8vw, 0.98rem);
+      line-height: 1.75;
+      white-space: pre-wrap;
+    }
+
+    .code-keyword {
+      color: #60a5fa;
+    }
+
+    .code-value {
+      color: #86efac;
+    }
+
+    .section {
+      margin-top: 28px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(15, 23, 36, 0.72);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-kicker {
+      margin-bottom: 8px;
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(1.6rem, 3vw, 2.35rem);
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      max-width: 420px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .switchboard {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.86fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .control-panel {
+      display: grid;
+      gap: 18px;
+    }
+
+    .control-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+      margin-bottom: 10px;
+      color: #d7e4f6;
+      font-weight: 800;
+    }
+
+    .control-title span {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mode-button,
+    .anchor-button,
+    .matrix-cell,
+    .copy-button {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(9, 14, 23, 0.72);
+      cursor: pointer;
+      transition: border-color 180ms ease, background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .mode-button:hover,
+    .anchor-button:hover,
+    .matrix-cell:hover,
+    .copy-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+      background: rgba(18, 28, 43, 0.9);
+    }
+
+    .mode-button:focus-visible,
+    .anchor-button:focus-visible,
+    .matrix-cell:focus-visible,
+    .copy-button:focus-visible {
+      outline: 3px solid rgba(96, 165, 250, 0.44);
+      outline-offset: 2px;
+    }
+
+    .mode-button {
+      min-height: 164px;
+      padding: 16px;
+      text-align: left;
+      border-color: color-mix(in srgb, var(--mode-color) 20%, var(--border));
+    }
+
+    .mode-button[aria-pressed="true"] {
+      border-color: color-mix(in srgb, var(--mode-color) 72%, white 8%);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--mode-color) 15%, transparent), transparent),
+        rgba(18, 28, 43, 0.98);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--mode-color) 22%, transparent), 0 20px 55px color-mix(in srgb, var(--mode-color) 15%, transparent);
+    }
+
+    .mode-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .mode-name {
+      font-size: 1.02rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+
+    .mode-chip {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+      background: var(--mode-color);
+      box-shadow: 0 0 20px color-mix(in srgb, var(--mode-color) 58%, transparent);
+    }
+
+    .mode-desc {
+      margin: 0 0 13px;
+      color: #c8d6e8;
+      font-weight: 700;
+    }
+
+    .mode-example,
+    .mini-code,
+    .formula,
+    .example-line {
+      font-family: var(--mono);
+    }
+
+    .mode-example {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .anchor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .anchor-button {
+      min-height: 82px;
+      padding: 13px 12px;
+      text-align: left;
+    }
+
+    .anchor-button[aria-pressed="true"] {
+      border-color: var(--accent-border);
+      background: linear-gradient(180deg, var(--accent-soft), rgba(18, 28, 43, 0.92));
+      box-shadow: 0 14px 42px color-mix(in srgb, var(--accent) 14%, transparent);
+    }
+
+    .anchor-button strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+
+    .anchor-button span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .result-card {
+      position: sticky;
+      top: 18px;
+      border: 1px solid var(--accent-border);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, var(--accent-soft), transparent 48%),
+        linear-gradient(180deg, rgba(18, 28, 43, 0.98), rgba(10, 16, 27, 0.98));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .result-main {
+      padding: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .label {
+      display: inline-flex;
+      margin-bottom: 12px;
+      padding: 6px 9px;
+      border: 1px solid var(--accent-border);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: color-mix(in srgb, var(--accent) 32%, white);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .tense-name {
+      margin-bottom: 14px;
+      font-size: clamp(1.85rem, 4vw, 3.05rem);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .formula,
+    .example-line {
+      display: block;
+      padding: 12px 13px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 6px;
+      background: rgba(7, 11, 18, 0.78);
+      color: #dce9fb;
+      overflow-wrap: anywhere;
+    }
+
+    .result-grid {
+      display: grid;
+      gap: 14px;
+      padding: 18px 22px 22px;
+    }
+
+    .info-block h3 {
+      margin-bottom: 7px;
+      color: #d8e6f8;
+      font-size: 0.84rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .info-block p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    li + li {
+      margin-top: 5px;
+    }
+
+    .mistake-box,
+    .contrast-box {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 6px;
+      background: rgba(7, 11, 18, 0.5);
+    }
+
+    .wrong {
+      color: #fda4af;
+    }
+
+    .correct {
+      color: #86efac;
+    }
+
+    .contrast-title {
+      color: #d8e6f8;
+      font-weight: 800;
+    }
+
+    .matrix-wrap {
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .matrix-hint {
+      display: none;
+      margin: 0 0 10px;
+      color: var(--faint);
+      font-size: 0.86rem;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: 140px repeat(3, minmax(174px, 1fr));
+      min-width: 700px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(7, 11, 18, 0.45);
+    }
+
+    .matrix-head,
+    .matrix-row-label {
+      min-height: 58px;
+      padding: 13px;
+      display: grid;
+      align-items: center;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      color: #d8e6f8;
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(18, 28, 43, 0.76);
+    }
+
+    .matrix-head:last-child,
+    .matrix-cell:nth-child(4n) {
+      border-right: 0;
+    }
+
+    .matrix-row-label {
+      color: var(--matrix-color);
+    }
+
+    .matrix-cell {
+      min-height: 74px;
+      padding: 13px;
+      border-width: 0 1px 1px 0;
+      border-color: var(--border);
+      border-radius: 0;
+      text-align: left;
+    }
+
+    .matrix-cell[aria-pressed="true"] {
+      border-color: var(--accent-border);
+      background: linear-gradient(180deg, var(--accent-soft), rgba(18, 28, 43, 0.86));
+      box-shadow: inset 0 0 0 1px var(--accent-border);
+    }
+
+    .matrix-cell strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #eef5ff;
+      font-size: 0.9rem;
+    }
+
+    .matrix-cell span {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .meaning-card,
+    .contrast-card,
+    .standup-card {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(9, 14, 23, 0.62);
+    }
+
+    .meaning-card h3,
+    .contrast-card h3,
+    .standup-card h3 {
+      margin-bottom: 10px;
+      color: #d8e6f8;
+      font-size: 0.94rem;
+    }
+
+    .meaning-card p,
+    .contrast-card p,
+    .standup-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .meaning-card .example-line,
+    .contrast-card .example-line,
+    .standup-card .example-line {
+      margin-top: 10px;
+      font-size: 0.82rem;
+    }
+
+    .contrast-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .compare-side {
+      padding: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 6px;
+      background: rgba(7, 11, 18, 0.56);
+    }
+
+    .compare-side strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #eef5ff;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .compare-side span {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .standup-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .standup-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .standup-card h3 {
+      margin-bottom: 4px;
+    }
+
+    .copy-button {
+      min-width: 84px;
+      min-height: 38px;
+      padding: 8px 12px;
+      color: #cfe0f5;
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .footer-note {
+      margin: 28px 0 0;
+      color: var(--faint);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .switchboard,
+      .cards-grid,
+      .contrast-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .result-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .app-shell {
+        width: min(100% - 20px, 1180px);
+        padding-top: 20px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 30px 0 28px;
+      }
+
+      .section {
+        padding: 18px;
+      }
+
+      .section-header,
+      .two-col,
+      .mode-grid,
+      .anchor-grid,
+      .compare,
+      .standup-card {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header,
+      .standup-card {
+        display: grid;
+        align-items: start;
+      }
+
+      .mode-button {
+        min-height: 132px;
+      }
+
+      .anchor-button {
+        min-height: 70px;
+      }
+
+      .hero-panel code {
+        min-height: auto;
+      }
+
+      .matrix-hint {
+        display: block;
+      }
+
+      .matrix-wrap {
+        overflow-x: visible;
+      }
+
+      .matrix {
+        display: grid;
+        min-width: 0;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        border: 0;
+        background: transparent;
+        overflow: visible;
+      }
+
+      .matrix-head {
+        display: none;
+      }
+
+      .matrix-row-label {
+        min-height: auto;
+        margin-top: 4px;
+        padding: 8px 0 2px;
+        border: 0;
+        background: transparent;
+      }
+
+      .matrix-cell {
+        min-height: 64px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: rgba(9, 14, 23, 0.62);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Tense Decision Engine</p>
+          <h1 id="hero-title">English Tenses for Engineers</h1>
+          <p class="hero-lede">Choose the state. Get the tense. Stop memorizing grammar tables. Start thinking in task states: fact, process, result, duration.</p>
+          <p class="hero-subtitle">A practical tense switchboard for standups, Slack updates, PR reviews, debugging, incidents, and project communication.</p>
+        </div>
+        <div class="hero-panel" aria-label="Meaning mode times time anchor preview">
+          <div class="terminal-bar" aria-hidden="true">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <code><span class="code-keyword">meaningMode</span> × <span class="code-keyword">timeAnchor</span>
+
+<span class="code-value">FACT</span>     now | past | future
+<span class="code-value">PROCESS</span>  now | past | future
+<span class="code-value">RESULT</span>   now | past | future
+<span class="code-value">DURATION</span> now | past | future
+
+what_do_you_want_to_say()
+  → choose state
+  → choose time
+  → tense becomes obvious</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="switchboard-title">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Main Switchboard</p>
+          <h2 id="switchboard-title">What do you want to say?</h2>
+        </div>
+        <p class="section-note">Pick intent first, then time. The grammar name follows the meaning instead of leading it.</p>
+      </div>
+
+      <div class="switchboard">
+        <div class="control-panel">
+          <div>
+            <div class="control-title">Meaning Mode <span>state</span></div>
+            <div class="mode-grid" id="modeButtons"></div>
+          </div>
+
+          <div>
+            <div class="control-title">Time Anchor <span>when</span></div>
+            <div class="anchor-grid" id="anchorButtons"></div>
+          </div>
+        </div>
+
+        <article class="result-card" id="resultCard" aria-live="polite">
+          <div class="result-main">
+            <span class="label" id="resultLabel"></span>
+            <h2 class="tense-name" id="resultName"></h2>
+            <div class="info-block">
+              <h3>Formula</h3>
+              <span class="formula" id="resultFormula"></span>
+            </div>
+            <div class="info-block" style="margin-top: 14px;">
+              <h3>Example</h3>
+              <span class="example-line" id="resultExample"></span>
+            </div>
+          </div>
+          <div class="result-grid">
+            <div class="info-block">
+              <h3>Meaning</h3>
+              <p id="resultMeaning"></p>
+            </div>
+            <div class="two-col">
+              <div class="info-block">
+                <h3>Use when</h3>
+                <ul id="useWhen"></ul>
+              </div>
+              <div class="info-block">
+                <h3>Don’t use when</h3>
+                <ul id="dontUseWhen"></ul>
+              </div>
+            </div>
+            <div class="info-block">
+              <h3>Common mistake</h3>
+              <div class="mistake-box">
+                <span class="mini-code wrong" id="mistakeWrong"></span>
+                <span class="mini-code correct" id="mistakeCorrect"></span>
+              </div>
+            </div>
+            <div class="info-block">
+              <h3>Contrast</h3>
+              <div class="contrast-box">
+                <span class="contrast-title" id="contrastTitle"></span>
+                <span class="mini-code" id="contrastLeft"></span>
+                <span class="mini-code" id="contrastRight"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="matrix-title">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Tense Matrix</p>
+          <h2 id="matrix-title">Twelve combinations, one mental model.</h2>
+        </div>
+        <p class="section-note">Every cell is clickable and keeps the switchboard in sync.</p>
+      </div>
+      <div class="matrix-wrap">
+        <p class="matrix-hint">Tap a tense below. The selected card updates instantly.</p>
+        <div class="matrix" id="tenseMatrix"></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="drill-title">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Drill Mode</p>
+          <h2 id="drill-title">One action. Twelve meanings.</h2>
+        </div>
+        <p class="section-note">Base action: <span class="mini-code">fix the auth bug</span></p>
+      </div>
+      <div class="cards-grid" id="drillGrid"></div>
+    </section>
+
+    <section class="section" aria-labelledby="contrast-mode-title">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Contrast Mode</p>
+          <h2 id="contrast-mode-title">Similar tenses, different intent.</h2>
+        </div>
+        <p class="section-note">Use these pairs when two options feel almost right.</p>
+      </div>
+      <div class="contrast-grid" id="contrastGrid"></div>
+    </section>
+
+    <section class="section" aria-labelledby="standup-title">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Work Communication</p>
+          <h2 id="standup-title">Standup Builder</h2>
+        </div>
+        <p class="section-note">Ready-made lines for daily updates, blockers, plans, and progress.</p>
+      </div>
+      <div class="standup-list" id="standupList"></div>
+    </section>
+
+    <p class="footer-note">Think in state, anchor it in time, then ship the sentence.</p>
+  </main>
+
+  <script>
+    const tenseMap = {
+      fact: {
+        now: {
+          name: "Present Simple",
+          label: "FACT NOW",
+          formula: "subject + V1 / V-s",
+          example: "I write tests for critical flows.",
+          meaning: "Use it for habits, general facts, repeated actions, or stable truths.",
+          useWhen: [
+            "you describe regular work",
+            "you talk about habits or responsibilities",
+            "you describe how something usually works"
+          ],
+          dontUseWhen: [
+            "the action is happening right now",
+            "you want to emphasize a result",
+            "you talk about a specific finished event in the past"
+          ],
+          mistake: {
+            wrong: "I am write tests every day.",
+            correct: "I write tests every day."
+          },
+          contrast: {
+            title: "Present Simple vs Present Continuous",
+            left: "I write tests every day. = regular responsibility",
+            right: "I’m writing tests now. = current process"
+          }
+        },
+        past: {
+          name: "Past Simple",
+          label: "FACT IN THE PAST",
+          formula: "subject + V2",
+          example: "I fixed the auth bug yesterday.",
+          meaning: "Use it for finished events in the past, especially with a clear past time.",
+          useWhen: [
+            "the action is finished",
+            "you mention when it happened",
+            "you describe a completed past event"
+          ],
+          dontUseWhen: [
+            "the result matters now more than the time",
+            "the action was in progress at a specific moment",
+            "the action happened before another past event"
+          ],
+          mistake: {
+            wrong: "I have fixed it yesterday.",
+            correct: "I fixed it yesterday."
+          },
+          contrast: {
+            title: "Past Simple vs Present Perfect",
+            left: "I fixed it yesterday. = finished past event",
+            right: "I’ve fixed it. = result matters now"
+          }
+        },
+        future: {
+          name: "Future Simple",
+          label: "FUTURE FACT / DECISION",
+          formula: "will + V1",
+          example: "I’ll fix the bug after lunch.",
+          meaning: "Use it for decisions, promises, predictions, or future actions.",
+          useWhen: [
+            "you decide something now",
+            "you promise or offer to do something",
+            "you make a simple future statement"
+          ],
+          dontUseWhen: [
+            "the future action is already scheduled",
+            "you want to say it will be in progress",
+            "you want to say it will be completed before a deadline"
+          ],
+          mistake: {
+            wrong: "I will fixing it tomorrow.",
+            correct: "I’ll fix it tomorrow."
+          },
+          contrast: {
+            title: "Future Simple vs Present Continuous",
+            left: "I’ll deploy it tomorrow. = decision or promise",
+            right: "I’m deploying it tomorrow. = arranged plan"
+          }
+        }
+      },
+      process: {
+        now: {
+          name: "Present Continuous",
+          label: "PROCESS NOW",
+          formula: "am / is / are + V-ing",
+          example: "I’m reviewing the pull request.",
+          meaning: "Use it when you are inside the action right now or around now.",
+          useWhen: [
+            "the action is happening now",
+            "the task is currently active",
+            "the situation is temporary"
+          ],
+          dontUseWhen: [
+            "you describe a regular habit",
+            "you emphasize a completed result",
+            "you describe how long it has been happening"
+          ],
+          mistake: {
+            wrong: "I review the PR right now.",
+            correct: "I’m reviewing the PR right now."
+          },
+          contrast: {
+            title: "Present Continuous vs Present Perfect Continuous",
+            left: "I’m debugging it. = I’m doing it now",
+            right: "I’ve been debugging it for 3 hours. = duration matters"
+          }
+        },
+        past: {
+          name: "Past Continuous",
+          label: "PROCESS IN THE PAST",
+          formula: "was / were + V-ing",
+          example: "I was deploying the app when the server crashed.",
+          meaning: "Use it for an action that was in progress at a specific moment in the past.",
+          useWhen: [
+            "you were inside an action at a past moment",
+            "one action was interrupted by another",
+            "you describe background activity"
+          ],
+          dontUseWhen: [
+            "you only need a finished past fact",
+            "you describe a sequence of completed actions",
+            "you emphasize result before another past event"
+          ],
+          mistake: {
+            wrong: "I deployed when the server was crashing.",
+            correct: "I was deploying when the server crashed."
+          },
+          contrast: {
+            title: "Past Simple vs Past Continuous",
+            left: "I deployed the app. = finished event",
+            right: "I was deploying the app. = process at that moment"
+          }
+        },
+        future: {
+          name: "Future Continuous",
+          label: "PROCESS IN THE FUTURE",
+          formula: "will be + V-ing",
+          example: "I’ll be reviewing PRs at 3 PM.",
+          meaning: "Use it for an action that will be in progress at a specific future time.",
+          useWhen: [
+            "you describe what you will be doing at a future moment",
+            "the time slot is occupied",
+            "you want to sound less abrupt than a direct future statement"
+          ],
+          dontUseWhen: [
+            "you simply promise to do something",
+            "you focus on completion before a deadline",
+            "you describe a fixed arrangement better expressed with Present Continuous"
+          ],
+          mistake: {
+            wrong: "I will reviewing PRs at 3.",
+            correct: "I’ll be reviewing PRs at 3."
+          },
+          contrast: {
+            title: "Future Simple vs Future Continuous",
+            left: "I’ll review it at 3. = future action",
+            right: "I’ll be reviewing it at 3. = I’ll be in the process"
+          }
+        }
+      },
+      result: {
+        now: {
+          name: "Present Perfect",
+          label: "RESULT NOW",
+          formula: "have / has + V3",
+          example: "I’ve deployed the hotfix.",
+          meaning: "Use it when the result exists now and the exact past time is not important.",
+          useWhen: [
+            "the task is done and relevant now",
+            "you report progress",
+            "you talk about experience or recent completion"
+          ],
+          dontUseWhen: [
+            "you mention exact past time",
+            "you only describe a past story",
+            "you want to emphasize ongoing duration"
+          ],
+          mistake: {
+            wrong: "I have deployed it yesterday.",
+            correct: "I deployed it yesterday."
+          },
+          contrast: {
+            title: "Present Perfect vs Past Simple",
+            left: "I’ve deployed it. = result is available now",
+            right: "I deployed it yesterday. = finished past event"
+          }
+        },
+        past: {
+          name: "Past Perfect",
+          label: "RESULT BEFORE PAST",
+          formula: "had + V3",
+          example: "I had fixed the bug before the demo started.",
+          meaning: "Use it when something was already completed before another past moment.",
+          useWhen: [
+            "one past action happened before another past action",
+            "you explain why something was already ready",
+            "you need a past checkpoint"
+          ],
+          dontUseWhen: [
+            "there is only one past event",
+            "the order is already obvious and simple",
+            "you are talking about a result that matters now"
+          ],
+          mistake: {
+            wrong: "I had fixed the bug yesterday.",
+            correct: "I fixed the bug yesterday."
+          },
+          contrast: {
+            title: "Past Simple vs Past Perfect",
+            left: "I fixed it before the demo. = simple timeline",
+            right: "I had fixed it before the demo started. = already completed before that point"
+          }
+        },
+        future: {
+          name: "Future Perfect",
+          label: "RESULT BEFORE FUTURE DEADLINE",
+          formula: "will have + V3",
+          example: "I’ll have finished the migration by Friday.",
+          meaning: "Use it when something will be completed before a future deadline.",
+          useWhen: [
+            "you talk about completion by a deadline",
+            "you make a delivery forecast",
+            "you describe future result before another future moment"
+          ],
+          dontUseWhen: [
+            "you simply say you will do something",
+            "you describe what you will be doing at a time",
+            "there is no future checkpoint"
+          ],
+          mistake: {
+            wrong: "I will finish it by Friday already.",
+            correct: "I’ll have finished it by Friday."
+          },
+          contrast: {
+            title: "Future Simple vs Future Perfect",
+            left: "I’ll finish it on Friday. = action happens on Friday",
+            right: "I’ll have finished it by Friday. = completed before or by Friday"
+          }
+        }
+      },
+      duration: {
+        now: {
+          name: "Present Perfect Continuous",
+          label: "DURATION UNTIL NOW",
+          formula: "have / has been + V-ing",
+          example: "I’ve been debugging this issue for 3 hours.",
+          meaning: "Use it when an action started earlier and has continued until now.",
+          useWhen: [
+            "you emphasize how long something has been happening",
+            "the action may still be happening",
+            "you want to show effort, delay, or ongoing struggle"
+          ],
+          dontUseWhen: [
+            "you only need to say the task is done",
+            "you mention a finished past time",
+            "you describe a regular habit"
+          ],
+          mistake: {
+            wrong: "I am debugging it for 3 hours.",
+            correct: "I’ve been debugging it for 3 hours."
+          },
+          contrast: {
+            title: "Present Continuous vs Present Perfect Continuous",
+            left: "I’m debugging it. = current process",
+            right: "I’ve been debugging it for 3 hours. = duration until now"
+          }
+        },
+        past: {
+          name: "Past Perfect Continuous",
+          label: "DURATION BEFORE PAST",
+          formula: "had been + V-ing",
+          example: "I had been debugging it for 3 hours before I found the root cause.",
+          meaning: "Use it when an action had been continuing for some time before another past event.",
+          useWhen: [
+            "you emphasize duration before a past event",
+            "you explain why someone was tired, blocked, or delayed",
+            "you need a process before a past checkpoint"
+          ],
+          dontUseWhen: [
+            "you only describe one finished past event",
+            "you only need result before past",
+            "you are talking about duration until now"
+          ],
+          mistake: {
+            wrong: "I was debugging it for 3 hours before I found the issue.",
+            correct: "I had been debugging it for 3 hours before I found the issue."
+          },
+          contrast: {
+            title: "Past Continuous vs Past Perfect Continuous",
+            left: "I was debugging at 3 PM. = process at that moment",
+            right: "I had been debugging for 3 hours before the call. = duration before past point"
+          }
+        },
+        future: {
+          name: "Future Perfect Continuous",
+          label: "DURATION BEFORE FUTURE DEADLINE",
+          formula: "will have been + V-ing",
+          example: "By 5 PM, I’ll have been debugging this for 6 hours.",
+          meaning: "Use it when an action will have been continuing for some time by a future point.",
+          useWhen: [
+            "you emphasize duration by a future deadline",
+            "you describe how long something will have continued",
+            "you want to highlight accumulated effort"
+          ],
+          dontUseWhen: [
+            "you only need to say the task will be done",
+            "you only describe a future process",
+            "there is no duration and no future checkpoint"
+          ],
+          mistake: {
+            wrong: "By 5 PM, I will debug it for 6 hours.",
+            correct: "By 5 PM, I’ll have been debugging it for 6 hours."
+          },
+          contrast: {
+            title: "Future Continuous vs Future Perfect Continuous",
+            left: "I’ll be debugging at 5. = process at that time",
+            right: "By 5, I’ll have been debugging for 6 hours. = duration by that time"
+          }
+        }
+      }
+    };
+
+    const modes = [
+      { id: "fact", title: "FACT", desc: "Plain fact / event / habit", example: "I fixed the bug.", color: "#94a3b8" },
+      { id: "process", title: "PROCESS", desc: "Action in progress", example: "I’m fixing the bug.", color: "#3b82f6" },
+      { id: "result", title: "RESULT", desc: "Result is ready or relevant", example: "I’ve fixed the bug.", color: "#22c55e" },
+      { id: "duration", title: "DURATION", desc: "Something has been going on", example: "I’ve been fixing it for 3 hours.", color: "#f97316" }
+    ];
+
+    const anchors = [
+      { id: "now", title: "NOW", desc: "Current reality" },
+      { id: "past", title: "PAST", desc: "Before now" },
+      { id: "future", title: "FUTURE", desc: "After now" }
+    ];
+
+    const drillItems = [
+      ["Present Simple", "I fix auth bugs."],
+      ["Present Continuous", "I’m fixing the auth bug."],
+      ["Present Perfect", "I’ve fixed the auth bug."],
+      ["Present Perfect Continuous", "I’ve been fixing the auth bug for 3 hours."],
+      ["Past Simple", "I fixed the auth bug yesterday."],
+      ["Past Continuous", "I was fixing the auth bug when the build failed."],
+      ["Past Perfect", "I had fixed the auth bug before the demo started."],
+      ["Past Perfect Continuous", "I had been fixing the auth bug for 3 hours before I found the root cause."],
+      ["Future Simple", "I’ll fix the auth bug after lunch."],
+      ["Future Continuous", "I’ll be fixing the auth bug at 3 PM."],
+      ["Future Perfect", "I’ll have fixed the auth bug by Friday."],
+      ["Future Perfect Continuous", "By 5 PM, I’ll have been fixing the auth bug for 6 hours."]
+    ];
+
+    const contrastItems = [
+      {
+        title: "Present Perfect vs Past Simple",
+        left: ["I’ve fixed it.", "result matters now"],
+        right: ["I fixed it yesterday.", "finished past event"]
+      },
+      {
+        title: "Present Continuous vs Present Perfect Continuous",
+        left: ["I’m debugging it.", "I am doing it now"],
+        right: ["I’ve been debugging it for 3 hours.", "duration until now matters"]
+      },
+      {
+        title: "Past Simple vs Past Continuous",
+        left: ["I deployed the app.", "finished event"],
+        right: ["I was deploying the app when the server crashed.", "process interrupted by another event"]
+      },
+      {
+        title: "Future Simple vs Future Perfect",
+        left: ["I’ll finish it on Friday.", "action happens on Friday"],
+        right: ["I’ll have finished it by Friday.", "completed before or by Friday"]
+      }
+    ];
+
+    const standupItems = [
+      ["Yesterday", "I fixed the validation issue."],
+      ["Done", "I’ve deployed the hotfix."],
+      ["Blocked", "I’ve been waiting for API access since Monday."],
+      ["Today", "I’m working on the payment flow."],
+      ["Plan", "I’ll review the PR after lunch."]
+    ];
+
+    const state = {
+      mode: "duration",
+      anchor: "now"
+    };
+
+    applyHashState();
+
+    const modeButtons = document.querySelector("#modeButtons");
+    const anchorButtons = document.querySelector("#anchorButtons");
+    const tenseMatrix = document.querySelector("#tenseMatrix");
+    const drillGrid = document.querySelector("#drillGrid");
+    const contrastGrid = document.querySelector("#contrastGrid");
+    const standupList = document.querySelector("#standupList");
+
+    function setAccent() {
+      const color = modes.find((mode) => mode.id === state.mode).color;
+      document.documentElement.style.setProperty("--accent", color);
+      document.documentElement.style.setProperty("--accent-soft", `${hexToRgba(color, 0.13)}`);
+      document.documentElement.style.setProperty("--accent-border", `${hexToRgba(color, 0.46)}`);
+    }
+
+    function hexToRgba(hex, alpha) {
+      const value = hex.replace("#", "");
+      const r = parseInt(value.substring(0, 2), 16);
+      const g = parseInt(value.substring(2, 4), 16);
+      const b = parseInt(value.substring(4, 6), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    function applyHashState() {
+      const [mode, anchor] = location.hash.replace("#", "").split("-");
+      if (tenseMap[mode] && tenseMap[mode][anchor]) {
+        state.mode = mode;
+        state.anchor = anchor;
+        return true;
+      }
+      return false;
+    }
+
+    function syncHash() {
+      const nextHash = `#${state.mode}-${state.anchor}`;
+      if (location.hash !== nextHash) {
+        history.replaceState(null, "", nextHash);
+      }
+    }
+
+    function renderModeButtons() {
+      modeButtons.innerHTML = modes.map((mode) => `
+        <button class="mode-button" type="button" data-mode="${mode.id}" aria-pressed="false" style="--mode-color: ${mode.color};">
+          <span class="mode-top">
+            <span class="mode-name">${mode.title}</span>
+            <span class="mode-chip" aria-hidden="true"></span>
+          </span>
+          <span class="mode-desc">${mode.desc}</span>
+          <span class="mode-example">${mode.example}</span>
+        </button>
+      `).join("");
+
+      modeButtons.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.mode = button.dataset.mode;
+          updateView();
+        });
+      });
+    }
+
+    function renderAnchorButtons() {
+      anchorButtons.innerHTML = anchors.map((anchor) => `
+        <button class="anchor-button" type="button" data-anchor="${anchor.id}" aria-pressed="false">
+          <strong>${anchor.title}</strong>
+          <span>${anchor.desc}</span>
+        </button>
+      `).join("");
+
+      anchorButtons.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.anchor = button.dataset.anchor;
+          updateView();
+        });
+      });
+    }
+
+    function renderMatrix() {
+      const headers = ["", ...anchors.map((anchor) => anchor.title)];
+      const rows = modes.flatMap((mode) => [
+        `<div class="matrix-row-label" style="--matrix-color: ${mode.color};">${mode.title}</div>`,
+        ...anchors.map((anchor) => {
+          const tense = tenseMap[mode.id][anchor.id];
+          return `
+            <button class="matrix-cell" type="button" data-mode="${mode.id}" data-anchor="${anchor.id}" aria-pressed="false">
+              <strong>${tense.name}</strong>
+              <span>${mode.title} / ${anchor.title}</span>
+            </button>
+          `;
+        })
+      ]);
+
+      tenseMatrix.innerHTML = [
+        ...headers.map((header) => `<div class="matrix-head">${header}</div>`),
+        ...rows
+      ].join("");
+
+      tenseMatrix.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.mode = button.dataset.mode;
+          state.anchor = button.dataset.anchor;
+          updateView();
+          document.querySelector("#switchboard-title").scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+    }
+
+    function renderDrill() {
+      drillGrid.innerHTML = drillItems.map(([title, example]) => `
+        <article class="meaning-card">
+          <h3>${title}</h3>
+          <span class="example-line">${example}</span>
+        </article>
+      `).join("");
+    }
+
+    function renderContrasts() {
+      contrastGrid.innerHTML = contrastItems.map((item) => `
+        <article class="contrast-card">
+          <h3>${item.title}</h3>
+          <div class="compare">
+            <div class="compare-side">
+              <strong>${item.left[0]}</strong>
+              <span>= ${item.left[1]}</span>
+            </div>
+            <div class="compare-side">
+              <strong>${item.right[0]}</strong>
+              <span>= ${item.right[1]}</span>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return;
+        } catch (error) {
+          // Some browsers expose the API but block it for local files or automation.
+        }
+      }
+
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      const copied = document.execCommand("copy");
+      textarea.remove();
+
+      if (!copied) {
+        return Promise.reject(new Error("Copy command was blocked."));
+      }
+
+      return;
+    }
+
+    function renderStandup() {
+      standupList.innerHTML = standupItems.map(([title, text]) => `
+        <article class="standup-card">
+          <div>
+            <h3>${title}</h3>
+            <p class="example-line">${text}</p>
+          </div>
+          <button class="copy-button" type="button" data-copy="${text}">Copy</button>
+        </article>
+      `).join("");
+
+      standupList.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const original = "Copy";
+          try {
+            await copyText(button.dataset.copy);
+            button.textContent = "Copied";
+          } catch (error) {
+            selectLine(button);
+            button.textContent = "Selected";
+          }
+          window.setTimeout(() => {
+            button.textContent = original;
+          }, 1400);
+        });
+      });
+    }
+
+    function selectLine(button) {
+      const line = button.closest(".standup-card").querySelector(".example-line");
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(line);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    function renderList(elementId, items) {
+      const element = document.querySelector(elementId);
+      element.innerHTML = items.map((item) => `<li>${item}</li>`).join("");
+    }
+
+    function updatePressedStates() {
+      document.querySelectorAll("[data-mode]").forEach((button) => {
+        if (button.classList.contains("matrix-cell")) {
+          button.setAttribute("aria-pressed", String(button.dataset.mode === state.mode && button.dataset.anchor === state.anchor));
+        } else {
+          button.setAttribute("aria-pressed", String(button.dataset.mode === state.mode));
+        }
+      });
+
+      document.querySelectorAll("[data-anchor]:not(.matrix-cell)").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.anchor === state.anchor));
+      });
+    }
+
+    function updateView() {
+      setAccent();
+      const tense = tenseMap[state.mode][state.anchor];
+      document.querySelector("#resultLabel").textContent = tense.label;
+      document.querySelector("#resultName").textContent = tense.name;
+      document.querySelector("#resultFormula").textContent = tense.formula;
+      document.querySelector("#resultExample").textContent = tense.example;
+      document.querySelector("#resultMeaning").textContent = tense.meaning;
+      document.querySelector("#mistakeWrong").textContent = `✕ ${tense.mistake.wrong}`;
+      document.querySelector("#mistakeCorrect").textContent = `✓ ${tense.mistake.correct}`;
+      document.querySelector("#contrastTitle").textContent = tense.contrast.title;
+      document.querySelector("#contrastLeft").textContent = tense.contrast.left;
+      document.querySelector("#contrastRight").textContent = tense.contrast.right;
+      renderList("#useWhen", tense.useWhen);
+      renderList("#dontUseWhen", tense.dontUseWhen);
+      updatePressedStates();
+      syncHash();
+    }
+
+    window.addEventListener("hashchange", () => {
+      if (applyHashState()) {
+        updateView();
+      }
+    });
+
+    renderModeButtons();
+    renderAnchorButtons();
+    renderMatrix();
+    renderDrill();
+    renderContrasts();
+    renderStandup();
+    updateView();
+  </script>
+</body>
+</html>
