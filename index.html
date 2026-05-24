@@ -54,6 +54,10 @@
       color: inherit;
     }
 
+    [hidden] {
+      display: none !important;
+    }
+
     .app-shell {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
@@ -666,11 +670,293 @@
       font-size: 0.9rem;
     }
 
+    .mode-tabs,
+    .intent-grid,
+    .marker-grid,
+    .model-grid,
+    .work-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mode-tabs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 18px;
+      padding: 5px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(7, 11, 18, 0.56);
+    }
+
+    .tab-button,
+    .intent-button,
+    .marker-pill,
+    .work-button {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(9, 14, 23, 0.72);
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+    }
+
+    .tab-button {
+      min-height: 50px;
+      padding: 10px 12px;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .tab-button[aria-pressed="true"],
+    .intent-button[aria-pressed="true"],
+    .work-button[aria-pressed="true"] {
+      border-color: var(--accent-border);
+      background: linear-gradient(180deg, var(--accent-soft), rgba(18, 28, 43, 0.92));
+    }
+
+    .tab-button:hover,
+    .intent-button:hover,
+    .work-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .debugger-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.94fr) minmax(360px, 1.06fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .debug-panel {
+      display: grid;
+      gap: 16px;
+    }
+
+    .intent-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .intent-button,
+    .work-button {
+      min-height: 92px;
+      padding: 14px;
+    }
+
+    .intent-button strong,
+    .work-button strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #eef5ff;
+      font-size: 0.94rem;
+    }
+
+    .intent-button span,
+    .work-button span,
+    .diagnostic-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .sentence-input {
+      width: 100%;
+      min-height: 76px;
+      resize: vertical;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #070b12;
+      color: var(--text);
+      font-family: var(--mono);
+      line-height: 1.5;
+    }
+
+    .sentence-input:focus {
+      outline: 3px solid rgba(96, 165, 250, 0.35);
+      border-color: var(--border-strong);
+    }
+
+    .diagnostic-card,
+    .timeline-card,
+    .model-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(9, 14, 23, 0.64);
+      padding: 16px;
+    }
+
+    .diagnostic-card.is-warning {
+      border-color: rgba(251, 191, 36, 0.42);
+      background: linear-gradient(180deg, rgba(251, 191, 36, 0.08), rgba(9, 14, 23, 0.64));
+    }
+
+    .diagnostic-card.is-ok {
+      border-color: rgba(34, 197, 94, 0.35);
+    }
+
+    .diagnostic-card h3,
+    .timeline-card h3,
+    .model-card h3 {
+      margin-bottom: 9px;
+      color: #d8e6f8;
+      font-size: 0.86rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .diagnostic-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .diagnostic-title h3 {
+      margin: 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      width: fit-content;
+      padding: 5px 8px;
+      border: 1px solid var(--accent-border);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: color-mix(in srgb, var(--accent) 30%, white);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .focus-box {
+      padding: 13px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 8px;
+      background: rgba(7, 11, 18, 0.58);
+    }
+
+    .focus-box strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #eef5ff;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .focus-box span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .timeline {
+      position: relative;
+      min-height: 84px;
+      padding: 18px 12px 10px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 38px;
+      left: 18px;
+      right: 18px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(148, 163, 184, 0.25), rgba(148, 163, 184, 0.62), rgba(148, 163, 184, 0.25));
+    }
+
+    .timeline-span,
+    .timeline-focus {
+      position: absolute;
+      top: 31px;
+      height: 16px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 22px var(--accent-border);
+    }
+
+    .timeline-focus {
+      width: 16px;
+    }
+
+    .timeline-labels {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 42px;
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .marker-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .marker-pill {
+      padding: 11px;
+      cursor: default;
+    }
+
+    .marker-pill strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #eef5ff;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+    }
+
+    .marker-pill span {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .model-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .model-card {
+      min-height: 168px;
+    }
+
+    .model-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(7, 11, 18, 0.58);
+      font-size: 1.2rem;
+    }
+
+    .work-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .work-output {
+      margin-top: 14px;
+    }
+
     @media (max-width: 980px) {
       .hero-grid,
       .switchboard,
+      .debugger-grid,
       .cards-grid,
-      .contrast-grid {
+      .contrast-grid,
+      .model-grid,
+      .work-grid {
         grid-template-columns: 1fr;
       }
 
@@ -699,6 +985,9 @@
       .mode-grid,
       .anchor-grid,
       .compare,
+      .intent-grid,
+      .focus-grid,
+      .marker-grid,
       .standup-card {
         grid-template-columns: 1fr;
       }
@@ -765,10 +1054,10 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-grid">
         <div>
-          <p class="eyebrow">Tense Decision Engine</p>
+          <p class="eyebrow">Semantic Communication Debugger</p>
           <h1 id="hero-title">English Tenses for Engineers</h1>
-          <p class="hero-lede">Choose the state. Get the tense. Stop memorizing grammar tables. Start thinking in task states: fact, process, result, duration.</p>
-          <p class="hero-subtitle">A practical tense switchboard for standups, Slack updates, PR reviews, debugging, incidents, and project communication.</p>
+          <p class="hero-lede">Debug what you mean. Find the tense by focus, perspective, action state, and speaker intent.</p>
+          <p class="hero-subtitle">A semantic IDE for standups, Slack updates, PR reviews, debugging, incidents, and project communication.</p>
         </div>
         <div class="hero-panel" aria-label="Meaning mode times time anchor preview">
           <div class="terminal-bar" aria-hidden="true">
@@ -776,19 +1065,77 @@
             <span class="dot"></span>
             <span class="dot"></span>
           </div>
-          <code><span class="code-keyword">meaningMode</span> × <span class="code-keyword">timeAnchor</span>
+          <code><span class="code-keyword">communicationFocus</span> × <span class="code-keyword">actionState</span>
 
-<span class="code-value">FACT</span>     now | past | future
-<span class="code-value">PROCESS</span>  now | past | future
-<span class="code-value">RESULT</span>   now | past | future
-<span class="code-value">DURATION</span> now | past | future
+<span class="code-value">SNAPSHOT</span>      fact / event
+<span class="code-value">LIVE CAMERA</span>   process in motion
+<span class="code-value">CHECKPOINT</span>    result exists
+<span class="code-value">RUNNING TIMER</span> duration matters
 
-what_do_you_want_to_say()
-  → choose state
-  → choose time
-  → tense becomes obvious</code>
+debug_sentence()
+  → detect intent
+  → expose focus
+  → explain why not
+  → ship natural English</code>
         </div>
       </div>
+    </section>
+
+    <section class="section" aria-labelledby="debugger-title">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Primary Console</p>
+          <h2 id="debugger-title">Tense Debugger</h2>
+        </div>
+        <p class="section-note">Start with communicative intent. The app diagnoses focus, timeline logic, conflict markers, and social tone.</p>
+      </div>
+
+      <div class="mode-tabs" aria-label="Product mode">
+        <button class="tab-button" type="button" data-product-mode="learn" aria-pressed="true">Learn Mode</button>
+        <button class="tab-button" type="button" data-product-mode="work" aria-pressed="false">Work Mode</button>
+      </div>
+
+      <div class="debugger-grid">
+        <div class="debug-panel" id="learnModePanel">
+          <div>
+            <div class="control-title">What are you trying to communicate? <span>intent</span></div>
+            <div class="intent-grid" id="intentButtons"></div>
+          </div>
+
+          <div>
+            <div class="control-title">Sentence conflict detector <span>lint</span></div>
+            <textarea class="sentence-input" id="sentenceInput" spellcheck="false">I have fixed it yesterday.</textarea>
+          </div>
+        </div>
+
+        <div class="debug-panel" id="workModePanel" hidden>
+          <div>
+            <div class="control-title">Work communication shortcut <span>output</span></div>
+            <div class="work-grid" id="workButtons"></div>
+            <div class="work-output diagnostic-card is-ok" id="workOutput"></div>
+          </div>
+        </div>
+
+        <div class="debug-panel">
+          <article class="diagnostic-card is-ok" id="debuggerOutput" aria-live="polite"></article>
+          <article class="diagnostic-card is-warning" id="conflictOutput" aria-live="polite"></article>
+          <article class="timeline-card">
+            <h3>Attention timeline</h3>
+            <div class="timeline" id="debugTimeline"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="models-title">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Cognitive Compression</p>
+          <h2 id="models-title">Four models, twelve tenses.</h2>
+        </div>
+        <p class="section-note">Perfect tenses are checkpoints. Continuous tenses are cameras inside a process. This is the shortcut.</p>
+      </div>
+      <div class="model-grid" id="modelGrid"></div>
     </section>
 
     <section class="section" aria-labelledby="switchboard-title">
@@ -830,6 +1177,24 @@ what_do_you_want_to_say()
             <div class="info-block">
               <h3>Meaning</h3>
               <p id="resultMeaning"></p>
+            </div>
+            <div class="focus-grid">
+              <div class="focus-box">
+                <strong>Focus</strong>
+                <span id="resultFocus"></span>
+              </div>
+              <div class="focus-box">
+                <strong>Not focus</strong>
+                <span id="resultNotFocus"></span>
+              </div>
+            </div>
+            <div class="info-block">
+              <h3>Speaker intent</h3>
+              <p id="resultIntent"></p>
+            </div>
+            <div class="timeline-card">
+              <h3>Timeline logic</h3>
+              <div class="timeline" id="resultTimeline"></div>
             </div>
             <div class="two-col">
               <div class="info-block">
@@ -873,6 +1238,17 @@ what_do_you_want_to_say()
         <p class="matrix-hint">Tap a tense below. The selected card updates instantly.</p>
         <div class="matrix" id="tenseMatrix"></div>
       </div>
+    </section>
+
+    <section class="section" aria-labelledby="markers-title">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Time Marker System</p>
+          <h2 id="markers-title">Trigger words are semantic hints.</h2>
+        </div>
+        <p class="section-note">Markers do not magically choose grammar. They reveal the speaker’s focus.</p>
+      </div>
+      <div class="marker-grid" id="markerGrid"></div>
     </section>
 
     <section class="section" aria-labelledby="drill-title">
@@ -1294,9 +1670,237 @@ what_do_you_want_to_say()
       ["Plan", "I’ll review the PR after lunch."]
     ];
 
+    const semanticMeta = {
+      fact: {
+        model: "Snapshot",
+        icon: "📸",
+        core: "A plain fact, habit, decision, or finished event.",
+        now: {
+          focus: "stable reality, habit, responsibility, or how a system usually behaves",
+          notFocus: "current motion, completion result, or duration",
+          intent: "Sounds neutral and architectural: this is how things work.",
+          timeline: { type: "point", focusLeft: "50%", spanLeft: "48%", spanWidth: "4%", labels: ["usual", "now", "system"] }
+        },
+        past: {
+          focus: "when the finished event happened",
+          notFocus: "whether the result is relevant now",
+          intent: "Dry factual report: the event is closed.",
+          timeline: { type: "point", focusLeft: "24%", spanLeft: "22%", spanWidth: "4%", labels: ["yesterday", "now", "closed"] }
+        },
+        future: {
+          focus: "decision, promise, prediction, or simple future action",
+          notFocus: "future process or completion before a deadline",
+          intent: "Direct commitment or simple forecast.",
+          timeline: { type: "point", focusLeft: "76%", spanLeft: "74%", spanWidth: "4%", labels: ["now", "later", "decision"] }
+        }
+      },
+      process: {
+        model: "Live camera",
+        icon: "🎥",
+        core: "The camera is inside the action.",
+        now: {
+          focus: "current process happening now or around now",
+          notFocus: "finished result or how long it has continued",
+          intent: "Active status: I am handling this.",
+          timeline: { type: "span", focusLeft: "45%", spanLeft: "36%", spanWidth: "28%", labels: ["started", "now", "in motion"] }
+        },
+        past: {
+          focus: "process in progress at a past moment, often interrupted",
+          notFocus: "a simple sequence of completed events",
+          intent: "Incident timeline: this was happening when something else occurred.",
+          timeline: { type: "span", focusLeft: "31%", spanLeft: "18%", spanWidth: "30%", labels: ["past process", "interrupt", "now"] }
+        },
+        future: {
+          focus: "process that will be underway at a future moment",
+          notFocus: "promise or deadline completion",
+          intent: "Calm schedule: that time slot is occupied.",
+          timeline: { type: "span", focusLeft: "70%", spanLeft: "60%", spanWidth: "28%", labels: ["now", "3 PM", "in process"] }
+        }
+      },
+      result: {
+        model: "Checkpoint",
+        icon: "✅",
+        core: "By a checkpoint, the result already exists.",
+        now: {
+          focus: "result available now",
+          notFocus: "exact past time",
+          intent: "Progress update: this is done and relevant.",
+          timeline: { type: "point", focusLeft: "50%", spanLeft: "22%", spanWidth: "28%", labels: ["past work", "now", "result"] }
+        },
+        past: {
+          focus: "result already existed before another past event",
+          notFocus: "one simple past event",
+          intent: "Explains readiness or cause before a past checkpoint.",
+          timeline: { type: "point", focusLeft: "38%", spanLeft: "18%", spanWidth: "20%", labels: ["earlier", "past checkpoint", "now"] }
+        },
+        future: {
+          focus: "result will already exist by a future deadline",
+          notFocus: "the action happening on the deadline",
+          intent: "Delivery forecast with a completion checkpoint.",
+          timeline: { type: "point", focusLeft: "78%", spanLeft: "52%", spanWidth: "26%", labels: ["now", "by Friday", "ready"] }
+        }
+      },
+      duration: {
+        model: "Running timer",
+        icon: "⏱",
+        core: "The timer has been running until a checkpoint.",
+        now: {
+          focus: "duration plus ongoing process until now",
+          notFocus: "finished result",
+          intent: "Shows effort, persistence, delay, or possible frustration.",
+          timeline: { type: "span", focusLeft: "50%", spanLeft: "18%", spanWidth: "35%", labels: ["started", "now", "timer"] }
+        },
+        past: {
+          focus: "duration before a past event",
+          notFocus: "process at one past moment only",
+          intent: "Explains why someone was blocked, tired, delayed, or ready.",
+          timeline: { type: "span", focusLeft: "39%", spanLeft: "14%", spanWidth: "30%", labels: ["timer", "past event", "now"] }
+        },
+        future: {
+          focus: "duration accumulated by a future checkpoint",
+          notFocus: "simple future action or simple future process",
+          intent: "Highlights accumulated effort by a deadline.",
+          timeline: { type: "span", focusLeft: "78%", spanLeft: "34%", spanWidth: "46%", labels: ["now", "by 5 PM", "6 hours"] }
+        }
+      }
+    };
+
+    const intentItems = [
+      {
+        id: "done-now",
+        title: "A result is available now",
+        desc: "The important part is that the work is done and useful now.",
+        mode: "result",
+        anchor: "now",
+        checks: ["No exact past time", "Current relevance matters", "Result is available"],
+        whyNot: "Past Simple would move attention to when it happened."
+      },
+      {
+        id: "doing-now",
+        title: "An action is in progress",
+        desc: "The camera is inside the current task.",
+        mode: "process",
+        anchor: "now",
+        checks: ["Happening now", "Temporary active task", "Completion is not the point"],
+        whyNot: "Present Perfect Continuous adds duration; use it only when time spent matters."
+      },
+      {
+        id: "duration-now",
+        title: "I have been doing it for a while",
+        desc: "Duration, effort, or delay matters until now.",
+        mode: "duration",
+        anchor: "now",
+        checks: ["Started before now", "Still relevant now", "Duration is the message"],
+        whyNot: "Present Continuous says you are doing it now, but hides how long."
+      },
+      {
+        id: "past-event",
+        title: "A finished event at a past time",
+        desc: "The event is closed and the time marker matters.",
+        mode: "fact",
+        anchor: "past",
+        checks: ["Finished action", "Exact past time", "Closed event"],
+        whyNot: "Present Perfect conflicts with exact past markers like yesterday."
+      },
+      {
+        id: "interrupted",
+        title: "Something was interrupted",
+        desc: "One process was underway when another event hit it.",
+        mode: "process",
+        anchor: "past",
+        checks: ["Past process", "Interruption event", "Background activity"],
+        whyNot: "Past Simple alone flattens the process into a finished event."
+      },
+      {
+        id: "deadline-result",
+        title: "Completed before a deadline",
+        desc: "A future checkpoint matters more than the action itself.",
+        mode: "result",
+        anchor: "future",
+        checks: ["Future deadline", "Completion by that point", "Delivery forecast"],
+        whyNot: "Future Simple says the action happens later, not that it is ready by then."
+      }
+    ];
+
+    const modelItems = [
+      ["📸", "Simple = Snapshot", "A fact, habit, decision, or closed event. The speaker points at the thing."],
+      ["🎥", "Continuous = Live camera", "The camera is inside the process at now, a past moment, or a future moment."],
+      ["✅", "Perfect = Checkpoint", "By a checkpoint, the result already exists: by now, by then, or by a deadline."],
+      ["⏱", "Perfect Continuous = Running timer", "A process has been continuing over time until a checkpoint."]
+    ];
+
+    const markerItems = [
+      ["yesterday", "Past Simple", "exact past time"],
+      ["already / just / yet", "Present Perfect", "current relevance"],
+      ["for 3 hours", "Perfect Continuous", "duration matters"],
+      ["right now", "Present Continuous", "current process"],
+      ["by Friday", "Future Perfect", "deadline checkpoint"]
+    ];
+
+    const workItems = [
+      {
+        id: "done",
+        title: "Done",
+        desc: "Report useful completion.",
+        sentence: "I’ve deployed the hotfix.",
+        note: "Present Perfect: result is available now."
+      },
+      {
+        id: "blocked",
+        title: "Blocked",
+        desc: "Show duration and polite pressure.",
+        sentence: "I’ve been waiting for API access since Monday.",
+        note: "Present Perfect Continuous: duration explains the blocker."
+      },
+      {
+        id: "progress",
+        title: "In progress",
+        desc: "Say what you are actively handling.",
+        sentence: "I’m debugging the payment failure.",
+        note: "Present Continuous: current process."
+      },
+      {
+        id: "forecast",
+        title: "ETA",
+        desc: "Commit to a result by a deadline.",
+        sentence: "I’ll have finished the migration by Friday.",
+        note: "Future Perfect: result exists by the checkpoint."
+      }
+    ];
+
+    const conflictRules = [
+      {
+        test: (text) => /\b(have|has|'ve|'s)\s+\w+(ed|en)?\b/i.test(text) && /\byesterday\b|\blast\s+(week|month|year|night)\b|\bago\b/i.test(text),
+        title: "Present Perfect + exact past time conflict",
+        explain: "\"have/has + V3\" points to current relevance, but exact past markers point to a closed past event.",
+        fix: "I fixed it yesterday."
+      },
+      {
+        test: (text) => /\b(am|is|are|'m|'s|'re)\s+\w+ing\b/i.test(text) && /\bfor\s+\d+|\bsince\b/i.test(text),
+        title: "Current process + duration marker conflict",
+        explain: "Present Continuous shows current action only. A duration marker asks for the running timer model.",
+        fix: "I’ve been working on it for 3 hours."
+      },
+      {
+        test: (text) => /\bwill\s+\w+ed\b/i.test(text) || /\bwill\s+finished\b/i.test(text),
+        title: "Future structure conflict",
+        explain: "\"will\" needs a base verb. If a deadline marker is present, Future Perfect may be the intended focus.",
+        fix: "I’ll have finished it by Friday."
+      },
+      {
+        test: (text) => /\bby\s+(friday|monday|tuesday|wednesday|thursday|saturday|sunday|\d)/i.test(text) && /\bwill\s+\w+\b/i.test(text) && !/\bwill\s+have\b/i.test(text),
+        title: "Deadline marker detected",
+        explain: "\"by\" creates a future checkpoint. If completion is the focus, use Future Perfect.",
+        fix: "I’ll have finished it by Friday."
+      }
+    ];
+
     const state = {
       mode: "duration",
-      anchor: "now"
+      anchor: "now",
+      intent: "duration-now",
+      productMode: "learn",
+      work: "done"
     };
 
     applyHashState();
@@ -1307,6 +1911,18 @@ what_do_you_want_to_say()
     const drillGrid = document.querySelector("#drillGrid");
     const contrastGrid = document.querySelector("#contrastGrid");
     const standupList = document.querySelector("#standupList");
+    const intentButtons = document.querySelector("#intentButtons");
+    const debuggerOutput = document.querySelector("#debuggerOutput");
+    const conflictOutput = document.querySelector("#conflictOutput");
+    const sentenceInput = document.querySelector("#sentenceInput");
+    const debugTimeline = document.querySelector("#debugTimeline");
+    const resultTimeline = document.querySelector("#resultTimeline");
+    const modelGrid = document.querySelector("#modelGrid");
+    const markerGrid = document.querySelector("#markerGrid");
+    const workButtons = document.querySelector("#workButtons");
+    const workOutput = document.querySelector("#workOutput");
+    const learnModePanel = document.querySelector("#learnModePanel");
+    const workModePanel = document.querySelector("#workModePanel");
 
     function setAccent() {
       const color = modes.find((mode) => mode.id === state.mode).color;
@@ -1338,6 +1954,189 @@ what_do_you_want_to_say()
       if (location.hash !== nextHash) {
         history.replaceState(null, "", nextHash);
       }
+    }
+
+    function getCurrentMeta() {
+      return semanticMeta[state.mode][state.anchor];
+    }
+
+    function renderTimeline(target, meta) {
+      const timeline = meta.timeline;
+      target.innerHTML = `
+        <div class="timeline-span" style="left: ${timeline.spanLeft}; width: ${timeline.spanWidth};"></div>
+        <div class="timeline-focus" style="left: ${timeline.focusLeft};"></div>
+        <div class="timeline-labels">
+          <span>${timeline.labels[0]}</span>
+          <span>${timeline.labels[1]}</span>
+          <span>${timeline.labels[2]}</span>
+        </div>
+      `;
+    }
+
+    function renderTabs() {
+      document.querySelectorAll("[data-product-mode]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.productMode = button.dataset.productMode;
+          updateProductMode();
+        });
+      });
+      updateProductMode();
+    }
+
+    function updateProductMode() {
+      document.querySelectorAll("[data-product-mode]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.productMode === state.productMode));
+      });
+      learnModePanel.hidden = state.productMode !== "learn";
+      workModePanel.hidden = state.productMode !== "work";
+    }
+
+    function renderIntentButtons() {
+      intentButtons.innerHTML = intentItems.map((item) => `
+        <button class="intent-button" type="button" data-intent="${item.id}" aria-pressed="false">
+          <strong>${item.title}</strong>
+          <span>${item.desc}</span>
+        </button>
+      `).join("");
+
+      intentButtons.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const item = intentItems.find((intent) => intent.id === button.dataset.intent);
+          state.intent = item.id;
+          state.mode = item.mode;
+          state.anchor = item.anchor;
+          updateView();
+          updateDebugger();
+        });
+      });
+    }
+
+    function renderModels() {
+      modelGrid.innerHTML = modelItems.map(([icon, title, text]) => `
+        <article class="model-card">
+          <div class="model-icon" aria-hidden="true">${icon}</div>
+          <h3>${title}</h3>
+          <p>${text}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderMarkers() {
+      markerGrid.innerHTML = markerItems.map(([marker, tense, reason]) => `
+        <div class="marker-pill">
+          <strong>${marker}</strong>
+          <span>${tense}: ${reason}</span>
+        </div>
+      `).join("");
+    }
+
+    function renderWorkButtons() {
+      workButtons.innerHTML = workItems.map((item) => `
+        <button class="work-button" type="button" data-work="${item.id}" aria-pressed="false">
+          <strong>${item.title}</strong>
+          <span>${item.desc}</span>
+        </button>
+      `).join("");
+
+      workButtons.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.work = button.dataset.work;
+          updateWorkOutput();
+        });
+      });
+      updateWorkOutput();
+    }
+
+    function updateWorkOutput() {
+      const item = workItems.find((work) => work.id === state.work);
+      workButtons.querySelectorAll("button").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.work === state.work));
+      });
+      workOutput.innerHTML = `
+        <div class="diagnostic-title">
+          <h3>${item.title}</h3>
+          <span class="badge">Work Mode</span>
+        </div>
+        <span class="example-line">${item.sentence}</span>
+        <p style="margin-top: 10px;">${item.note}</p>
+      `;
+    }
+
+    function updateDebugger() {
+      const item = intentItems.find((intent) => intent.mode === state.mode && intent.anchor === state.anchor) || intentItems.find((intent) => intent.id === state.intent) || intentItems[0];
+      const tense = tenseMap[state.mode][state.anchor];
+      const meta = getCurrentMeta();
+      intentButtons.querySelectorAll("button").forEach((button) => {
+        const candidate = intentItems.find((intent) => intent.id === button.dataset.intent);
+        button.setAttribute("aria-pressed", String(candidate.mode === state.mode && candidate.anchor === state.anchor));
+      });
+      debuggerOutput.innerHTML = `
+        <div class="diagnostic-title">
+          <h3>Intent detected</h3>
+          <span class="badge">${tense.name}</span>
+        </div>
+        <div class="focus-grid">
+          <div class="focus-box">
+            <strong>Focus</strong>
+            <span>${meta.focus}</span>
+          </div>
+          <div class="focus-box">
+            <strong>Why not</strong>
+            <span>${item.mode === state.mode && item.anchor === state.anchor ? item.whyNot : tense.contrast.right}</span>
+          </div>
+        </div>
+        <div class="info-block" style="margin-top: 13px;">
+          <h3>Diagnostic questions</h3>
+          <ul>${(item.mode === state.mode && item.anchor === state.anchor ? item.checks : tense.useWhen).map((check) => `<li>${check}</li>`).join("")}</ul>
+        </div>
+        <div class="info-block" style="margin-top: 13px;">
+          <h3>Emotional context</h3>
+          <p>${meta.intent}</p>
+        </div>
+      `;
+      renderTimeline(debugTimeline, meta);
+      updateConflictDetector();
+    }
+
+    function updateConflictDetector() {
+      const text = sentenceInput.value.trim();
+      const match = conflictRules.find((rule) => rule.test(text));
+      if (!text) {
+        conflictOutput.className = "diagnostic-card";
+        conflictOutput.innerHTML = `
+          <div class="diagnostic-title">
+            <h3>Sentence diagnostics</h3>
+            <span class="badge">Idle</span>
+          </div>
+          <p>Paste a work sentence to lint tense markers and focus conflicts.</p>
+        `;
+        return;
+      }
+
+      if (match) {
+        conflictOutput.className = "diagnostic-card is-warning";
+        conflictOutput.innerHTML = `
+          <div class="diagnostic-title">
+            <h3>Conflict detected</h3>
+            <span class="badge">Diagnostic</span>
+          </div>
+          <p>${match.explain}</p>
+          <div class="mistake-box" style="margin-top: 12px;">
+            <span class="mini-code wrong">input: ${text}</span>
+            <span class="mini-code correct">fix: ${match.fix}</span>
+          </div>
+        `;
+        return;
+      }
+
+      conflictOutput.className = "diagnostic-card is-ok";
+      conflictOutput.innerHTML = `
+        <div class="diagnostic-title">
+          <h3>No obvious conflict</h3>
+          <span class="badge">Clean</span>
+        </div>
+        <p>No tense-marker contradiction was detected. Check focus and intent next.</p>
+      `;
     }
 
     function renderModeButtons() {
@@ -1488,6 +2287,8 @@ what_do_you_want_to_say()
       });
     }
 
+    sentenceInput.addEventListener("input", updateConflictDetector);
+
     function selectLine(button) {
       const line = button.closest(".standup-card").querySelector(".example-line");
       const selection = window.getSelection();
@@ -1519,11 +2320,15 @@ what_do_you_want_to_say()
     function updateView() {
       setAccent();
       const tense = tenseMap[state.mode][state.anchor];
+      const meta = getCurrentMeta();
       document.querySelector("#resultLabel").textContent = tense.label;
       document.querySelector("#resultName").textContent = tense.name;
       document.querySelector("#resultFormula").textContent = tense.formula;
       document.querySelector("#resultExample").textContent = tense.example;
       document.querySelector("#resultMeaning").textContent = tense.meaning;
+      document.querySelector("#resultFocus").textContent = meta.focus;
+      document.querySelector("#resultNotFocus").textContent = meta.notFocus;
+      document.querySelector("#resultIntent").textContent = `${meta.model}: ${meta.intent}`;
       document.querySelector("#mistakeWrong").textContent = `✕ ${tense.mistake.wrong}`;
       document.querySelector("#mistakeCorrect").textContent = `✓ ${tense.mistake.correct}`;
       document.querySelector("#contrastTitle").textContent = tense.contrast.title;
@@ -1531,7 +2336,9 @@ what_do_you_want_to_say()
       document.querySelector("#contrastRight").textContent = tense.contrast.right;
       renderList("#useWhen", tense.useWhen);
       renderList("#dontUseWhen", tense.dontUseWhen);
+      renderTimeline(resultTimeline, meta);
       updatePressedStates();
+      updateDebugger();
       syncHash();
     }
 
@@ -1543,6 +2350,11 @@ what_do_you_want_to_say()
 
     renderModeButtons();
     renderAnchorButtons();
+    renderTabs();
+    renderIntentButtons();
+    renderModels();
+    renderMarkers();
+    renderWorkButtons();
     renderMatrix();
     renderDrill();
     renderContrasts();
